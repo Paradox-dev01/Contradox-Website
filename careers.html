@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contradox | Careers</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      :root {
+        --logo-top: clamp(1.5rem, 2.5vw, 2.5rem);
+        --logo-side: clamp(1rem, 2.5vw, 2.5rem);
+        --logo-size: clamp(6rem, 12vw, 12rem);
+        --purple-mid: #1a0a2a;
+        --purple-light: #2d1b3d;
+        --accent: #9d4edd;
+        --accent-light: #c77dff;
+        --accent-dark: #7b2cbf;
+        --text: #f0e6ff;
+        --text-secondary: #b8a1d9;
+        --success: #38b000;
+        --warning: #ecb602;
+        --closed-bg: rgba(45, 27, 61, 0.4);
+      }
+
+      body {
+        background-color: black;
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(157, 78, 221, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(157, 78, 221, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(157, 78, 221, 0.05) 0%,
+            transparent 50%
+          );
+      }
+
+      /* Header with Logo */
+      .career-header {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        text-decoration: none;
+      }
+
+      .logo-img {
+        width: var(--logo-size);
+        height: auto;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: white;
+        box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Career Page Styles */
+      .career-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 2rem;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding-top: 1rem;
+      }
+
+      .page-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+      }
+
+      .page-header p {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .company-intro {
+        background: linear-gradient(
+          135deg,
+          rgba(45, 27, 61, 0.7),
+          rgba(26, 10, 42, 0.9)
+        );
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        border: 1px solid var(--purple-light);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .company-intro h2 {
+        color: var(--accent-light);
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+
+      .company-intro p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .positions-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .positions-header h2 {
+        color: var(--accent-light);
+        font-size: 2rem;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+      }
+
+      /* REVERSED COLORS */
+      .status-open {
+        background: rgba(255, 158, 0, 0.2);
+        color: var(--warning);
+        border: 1px solid rgba(255, 158, 0, 0.4);
+      }
+
+      .status-closed {
+        background: rgba(157, 78, 221, 0.2);
+        color: var(--accent);
+        border: 1px solid rgba(157, 78, 221, 0.4);
+      }
+
+      .job-listings {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      /* REVERSED COLORS - Open positions now yellow */
+      .job-card {
+        background: var(--closed-bg);
+        border-color: rgba(255, 158, 0, 0.3);
+        opacity: 0.9;
+        border-radius: 12px;
+        padding: 1.8rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .job-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #ff9e00, #ffba08);
+      }
+
+      .job-card:hover {
+        border-color: #ff9e00;
+        box-shadow: 0 15px 30px rgba(255, 158, 0, 0.2);
+      }
+
+      /* Closed positions now purple */
+      .job-card.closed {
+        background: linear-gradient(
+          145deg,
+          rgba(45, 27, 61, 0.8),
+          rgba(26, 10, 42, 0.9)
+        );
+        border: 1px solid var(--purple-light);
+        opacity: 1;
+      }
+
+      .job-card.closed::before {
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      }
+
+      .job-card.closed:hover {
+        transform: translateY(-10px);
+        border-color: var(--accent);
+        box-shadow: 0 15px 30px rgba(157, 78, 221, 0.2);
+      }
+
+      .job-title {
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* REVERSED COLORS for department badges */
+      .job-department {
+        display: inline-block;
+        background: rgba(255, 158, 0, 0.2);
+        color: #ffba08;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 158, 0, 0.3);
+      }
+
+      .job-card.closed .job-department {
+        background: rgba(157, 78, 221, 0.2);
+        color: var(--accent-light);
+        border-color: rgba(157, 78, 221, 0.3);
+      }
+
+      /* Job Description Styles - Show More/Less System */
+      .job-description-container {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .job-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        flex-grow: 1;
+        transition: max-height 0.5s ease;
+        overflow: hidden;
+        max-height: 4.8em; /* Show 3 lines */
+      }
+
+      .job-description.expanded {
+        max-height: 500px; /* Enough for full description */
+      }
+
+      .show-more-btn {
+        background: transparent;
+        border: none;
+        color: var(--accent-light);
+        font-size: 0.9rem;
+        cursor: pointer;
+        padding: 0.3rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .job-card .show-more-btn {
+        color: #ffba08;
+      }
+
+      .show-more-btn:hover {
+        color: var(--accent);
+      }
+
+      .job-card .show-more-btn:hover {
+        color: #ff9e00;
+      }
+
+      .job-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .job-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .job-detail i {
+        color: #ff9e00;
+      }
+
+      .job-card.closed .job-detail i {
+        color: var(--accent);
+      }
+
+      /* Job card buttons container */
+      .job-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: auto;
+      }
+
+      .details-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex: 1;
+      }
+
+      .details-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .apply-btn {
+        background: linear-gradient(90deg, #ff9e00, #ffba08);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: none;
+        flex: 2;
+      }
+
+      .apply-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 15px rgba(255, 158, 0, 0.4);
+      }
+
+      .job-card.closed .apply-btn {
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      }
+
+      .job-card.closed .apply-btn:hover {
+        box-shadow: 0 7px 15px rgba(157, 78, 221, 0.4);
+      }
+
+      /* Job Details Modal */
+      .job-details-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 2rem;
+      }
+
+      .job-details-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .job-details-content {
+        background: linear-gradient(
+          135deg,
+          rgba(45, 27, 61, 0.95),
+          rgba(26, 10, 42, 0.98)
+        );
+        border-radius: 15px;
+        padding: 2.5rem;
+        max-width: 800px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        border: 1px solid var(--purple-light);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        position: relative;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--purple-light);
+        padding-bottom: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 2.2rem;
+        color: var(--accent-light);
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-department {
+        display: inline-block;
+        background: rgba(157, 78, 221, 0.2);
+        color: var(--accent-light);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(157, 78, 221, 0.3);
+      }
+
+      .close-modal {
+        background: transparent;
+        border: none;
+        color: var(--text);
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        padding: 0.5rem;
+      }
+
+      .close-modal:hover {
+        color: var(--accent);
+      }
+
+      .modal-job-details {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .modal-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      .modal-detail i {
+        color: var(--accent);
+      }
+
+      .modal-section {
+        margin-bottom: 2rem;
+      }
+
+      .modal-section h3 {
+        color: var(--accent-light);
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .modal-section p,
+      .modal-section ul {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-section ul {
+        padding-left: 1.5rem;
+      }
+
+      .modal-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-apply-btn {
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      .modal-apply-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(157, 78, 221, 0.4);
+      }
+
+      /* Application Form Styles */
+      .application-form-container {
+        display: none;
+        background: linear-gradient(
+          135deg,
+          rgba(45, 27, 61, 0.9),
+          rgba(26, 10, 42, 0.95)
+        );
+        border-radius: 15px;
+        padding: 2.5rem;
+        border: 1px solid var(--purple-light);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        margin-top: 2rem;
+      }
+
+      .application-form-container.active {
+        display: block;
+      }
+
+      .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .form-header h2 {
+        font-size: 2rem;
+        color: var(--accent-light);
+      }
+
+      .close-form {
+        background: transparent;
+        border: none;
+        color: var(--text);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .close-form:hover {
+        color: var(--accent);
+      }
+
+      .form-row {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .form-group label .required {
+        color: var(--accent);
+      }
+
+      .form-group label .optional {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: normal;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.9rem;
+        background: rgba(26, 10, 42, 0.7);
+        border: 1px solid var(--purple-light);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 1rem;
+        transition: border 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(157, 78, 221, 0.2);
+      }
+
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .portfolio-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .portfolio-links .form-group {
+        margin-bottom: 0;
+      }
+
+      .file-upload {
+        border: 2px dashed var(--purple-light);
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        transition: border 0.3s ease;
+      }
+
+      .file-upload:hover {
+        border-color: var(--accent);
+      }
+
+      .file-upload label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        cursor: pointer;
+        color: var(--text-secondary);
+      }
+
+      .file-upload i {
+        font-size: 2.5rem;
+        color: var(--accent);
+      }
+
+      .file-name {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--accent-light);
+      }
+
+      .submit-btn {
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: block;
+        margin: 2rem auto 0;
+        min-width: 200px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(157, 78, 221, 0.4);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .success-message {
+        background: rgba(34, 139, 34, 0.2);
+        border: 1px solid rgba(50, 205, 50, 0.5);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        margin-top: 2rem;
+        display: none;
+      }
+
+      .success-message.active {
+        display: block;
+      }
+
+      .success-message i {
+        font-size: 3rem;
+        color: #32cd32;
+        margin-bottom: 1rem;
+      }
+
+      .closed-position-note {
+        background: rgba(255, 158, 0, 0.1);
+        border: 1px solid rgba(255, 158, 0, 0.3);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #ffba08;
+      }
+
+      .closed-position-note i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--purple-light);
+        margin-top: 4rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-buttons {
+          display: none;
+        }
+
+        .menu-icon {
+          display: block;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .portfolio-links {
+          grid-template-columns: 1fr;
+        }
+
+        .job-listings {
+          grid-template-columns: 1fr;
+        }
+
+        .page-header h1 {
+          font-size: 2.2rem;
+        }
+
+        .application-form-container {
+          padding: 1.5rem;
+        }
+
+        .career-header {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        .job-buttons {
+          flex-direction: column;
+        }
+
+        .details-btn,
+        .apply-btn {
+          width: 100%;
+        }
+
+        .job-details-content {
+          padding: 1.5rem;
+          width: 95%;
+        }
+
+        .modal-title {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* Form validation styles */
+      .form-group input:invalid:not(:focus):not(:placeholder-shown),
+      .form-group select:invalid:not(:focus) {
+        border-color: #ff4757;
+      }
+
+      .form-group input:valid:not(:focus):not(:placeholder-shown),
+      .form-group select:valid:not(:focus) {
+        border-color: var(--success);
+      }
+
+      /* Stars Background Effect */
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle 5s infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header with Logo -->
+    <!--
+<a href="index.html" class="logo-container">
+    Replace with your actual logo image
+    <img src="assets/contradox-logo.png"
+         alt="Contradox Logo"
+         class="logo-img"
+         onerror="this.onerror=null; this.style.display='none'; document.querySelector('.logo-text').style.marginLeft='0';" />
+    <span class="logo-text">Contradox</span>
+</a>
+-->
+
+    <!-- Job Details Modal -->
+    <div class="job-details-modal" id="jobDetailsModal">
+      <div class="job-details-content">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="modalJobTitle"></h2>
+            <span class="modal-department" id="modalDepartment"></span>
+          </div>
+          <button type="button" class="close-modal" onclick="closeJobDetails()">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <div class="modal-job-details">
+          <div class="modal-detail">
+            <i class="ri-time-line"></i>
+            <span id="modalType"></span>
+          </div>
+          <div class="modal-detail">
+            <i class="ri-map-pin-line"></i>
+            <span id="modalLocation"></span>
+          </div>
+          <div class="modal-detail">
+            <i class="ri-user-star-line"></i>
+            <span id="modalExperience"></span>
+          </div>
+          <div class="modal-detail">
+            <i class="ri-calendar-line"></i>
+            <span id="modalStatus"></span>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3><i class="ri-file-text-line"></i> Job Description</h3>
+          <p id="modalDescription"></p>
+        </div>
+
+        <div class="modal-section">
+          <h3><i class="ri-task-line"></i> Responsibilities</h3>
+          <ul id="modalResponsibilities"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h3><i class="ri-award-line"></i> Requirements</h3>
+          <ul id="modalRequirements"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h3><i class="ri-gift-line"></i> Benefits</h3>
+          <ul id="modalBenefits"></ul>
+        </div>
+
+        <button
+          type="button"
+          class="modal-apply-btn"
+          onclick="applyFromModal()"
+        >
+          <i class="ri-send-plane-line"></i>
+          <span id="modalApplyText">Apply Now</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Career Page Content -->
+    <div class="career-container">
+      <div class="page-header">
+        <h1>Join the Contradox Team</h1>
+        <p>
+          Explore opportunities to shape the future of digital innovation with
+          us. We're looking for passionate individuals to join our galaxy of
+          creators.
+        </p>
+      </div>
+
+      <div class="company-intro">
+        <h2>About Contradox</h2>
+        <p>
+          Contradox is a cutting-edge digital agency specializing in web, app,
+          UI/UX, and game development. We thrive on innovation and collaboration
+          to craft immersive experiences. At Contradox, we think beyond the
+          unthinkable and build beyond boundaries.
+        </p>
+      </div>
+
+      <!-- Open Positions -->
+      <div class="positions-header">
+        <h2>
+          Open Positions
+          <span class="status-badge status-open">Now Hiring</span>
+        </h2>
+        <p style="color: var(--text-secondary)">
+          Immediate opportunities available
+        </p>
+      </div>
+
+      <div class="job-listings" id="openJobListings">
+        <!-- Open job listings will be dynamically generated here -->
+      </div>
+
+      <!-- Closed Positions -->
+      <div class="positions-header" style="margin-top: 4rem">
+        <h2>
+          Our Positions
+          <span class="status-badge status-closed">Future Opportunities</span>
+        </h2>
+        <p style="color: var(--text-secondary)">
+          Apply now for future consideration
+        </p>
+      </div>
+
+      <div class="closed-position-note">
+        <i class="ri-time-line"></i>
+        <h3>Future Opportunities</h3>
+        <p>
+          These positions are currently closed for applications, but we're
+          always looking for talented individuals. Submit your application and
+          we'll reach out when we're hiring for these roles.
+        </p>
+      </div>
+
+      <div class="job-listings" id="closedJobListings">
+        <!-- Closed job listings will be dynamically generated here -->
+      </div>
+
+      <!-- Application Form -->
+      <div class="application-form-container" id="applicationForm">
+        <div class="form-header">
+          <h2 id="formJobTitle">Application Form</h2>
+          <button
+            type="button"
+            class="close-form"
+            onclick="closeApplicationForm()"
+          >
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <form id="careerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName"
+                >Full Name <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                placeholder="John Doe"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email"
+                >Email Address <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="john.doe@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone"
+                >Phone Number <span class="optional">(optional)</span></label
+              >
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+880"
+                pattern="[+]?[0-9\s\-\(\)]+"
+              />
+            </div>
+            <div class="form-group">
+              <label for="position"
+                >Applying for <span class="required">*</span></label
+              >
+              <select id="position" name="position" required>
+                <option value="">Select a position</option>
+                <!-- Options will be populated by JavaScript -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="experience"
+              >Years of Experience <span class="required">*</span></label
+            >
+            <select id="experience" name="experience" required>
+              <option value="">Select experience level</option>
+              <option value="0-1">0-1 years</option>
+              <option value="1-3">1-3 years</option>
+              <option value="3-5">3-5 years</option>
+              <option value="5+">5+ years</option>
+            </select>
+          </div>
+
+          <!-- Portfolio Links Section -->
+          <div class="portfolio-links">
+            <div class="form-group">
+              <label for="github"
+                >GitHub Profile <span class="optional">(optional)</span></label
+              >
+              <input
+                type="url"
+                id="github"
+                name="github"
+                placeholder="https://github.com/username"
+                pattern="https://github\.com/.+"
+              />
+            </div>
+            <div class="form-group">
+              <label for="linkedin"
+                >LinkedIn Profile
+                <span class="optional">(optional)</span></label
+              >
+              <input
+                type="url"
+                id="linkedin"
+                name="linkedin"
+                placeholder="https://linkedin.com/in/username"
+                pattern="https://(www\.)?linkedin\.com/in/.+"
+              />
+            </div>
+            <div class="form-group">
+              <label for="website"
+                >Personal Website
+                <span class="optional">(optional)</span></label
+              >
+              <input
+                type="url"
+                id="website"
+                name="website"
+                placeholder="https://yourwebsite.com"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="coverLetter"
+              >Cover Letter <span class="optional">(optional)</span></label
+            >
+            <textarea
+              id="coverLetter"
+              name="coverLetter"
+              placeholder="Tell us why you're interested in this position and what you can bring to Contradox... (Optional)"
+            ></textarea>
+          </div>
+
+          <div class="file-upload">
+            <label for="cvUpload">
+              <i class="ri-file-upload-line"></i>
+              <span
+                >Upload your CV/Resume (PDF only, max 5MB)
+                <span class="required">*</span></span
+              >
+              <span class="file-name" id="fileName">No file chosen</span>
+            </label>
+            <input
+              type="file"
+              id="cvUpload"
+              name="cv"
+              accept=".pdf"
+              style="display: none"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="futureNotification">
+              <input
+                type="checkbox"
+                id="futureNotification"
+                name="futureNotification"
+                checked
+              />
+              Notify me about future job openings
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="ri-send-plane-line"></i>
+            <span id="submitBtnText">Submit Application</span>
+          </button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <i class="ri-checkbox-circle-line"></i>
+          <h3>Application Submitted Successfully!</h3>
+          <p id="successMessageText">
+            Thank you for applying to Contradox. We'll review your application
+            and get back to you soon.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-text" id="footer-text">
+        <p>
+          Copyright © <span id="year"></span> Contradox | All rights reserved |
+          <a href="terms.html" target="_blank">Terms and Conditions</a>
+        </p>
+        <script>
+          // set year automatically
+          document.getElementById("year").textContent =
+            new Date().getFullYear();
+        </script>
+      </div>
+    </footer>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <script>
+      // Navigation to home
+      function goToHome() {
+        // In a real implementation, this would navigate to index.html
+        // For demo purposes, we'll show an alert and simulate navigation
+        alert("Navigating to homepage (index.html)");
+        // window.location.href = "index.html"; // Uncomment for real implementation
+      }
+
+      // Create starry background
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const starCount = 150;
+
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+
+          // Random size
+          const size = Math.random() * 3;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+
+          // Random position
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+
+          // Random animation delay
+          star.style.animationDelay = `${Math.random() * 5}s`;
+
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Job data with open/closed status - UPDATED WITH FULL DESCRIPTIONS
+      const jobPositions = [
+        {
+          id: 1,
+          title: "Full Stack Web Developer",
+          department: "Web Development",
+          description:
+            "Lead the development of cutting-edge websites and web applications using modern frameworks and technologies. Collaborate with designers to implement responsive, performant, and accessible web solutions. You'll work with both frontend and backend technologies to create complete digital experiences.",
+          type: "Full-time",
+          location: "Remote",
+          experience: "3+ years",
+          status: "closed",
+          responsibilities: [
+            "Develop and maintain web applications using modern frameworks",
+            "Collaborate with designers to implement responsive designs",
+            "Write clean, maintainable, and efficient code",
+            "Optimize applications for maximum speed and scalability",
+            "Implement security and data protection measures",
+          ],
+          requirements: [
+            "3+ years of experience in web development",
+            "Proficiency in JavaScript/TypeScript, HTML, CSS",
+            "Experience with React, Vue, or Angular",
+            "Knowledge of Node.js, Express, or similar backend frameworks",
+            "Understanding of RESTful APIs and databases",
+          ],
+          benefits: [
+            "Competitive salary and equity options",
+            "Flexible remote work schedule",
+            "Professional development budget",
+            "Health insurance and wellness programs",
+            "Regular team events and hackathons",
+          ],
+        },
+        {
+          id: 2,
+          title: "UI/UX Design Intern",
+          department: "Design",
+          description:
+            "Join our design team as a UI/UX Design Intern and learn to create intuitive and beautiful user interfaces for websites and applications. You'll assist with user research, create wireframes and prototypes, and collaborate with developers to bring designs to life. Perfect for students or recent graduates looking to gain real-world design experience. You'll work with tools like Figma, Adobe XD, and learn design thinking methodologies.",
+          type: "6-month Internship",
+          location: "Remote/Hybrid",
+          experience: "0-2+ years (freshers are welcome)",
+          status: "open",
+          responsibilities: [
+            "Assist in creating user interface designs and prototypes",
+            "Participate in user research and testing sessions",
+            "Create wireframes, user flows, and design specifications",
+            "Collaborate with developers to ensure design implementation",
+            "Contribute to design system and component library",
+          ],
+          requirements: [
+            "Basic understanding of design principles",
+            "Familiarity with design tools like Figma or Adobe XD",
+            "Strong visual design skills",
+            "Good communication and collaboration skills",
+            "Portfolio of design work (academic projects accepted)",
+          ],
+          benefits: [
+            "Mentorship from senior designers",
+            "Hands-on experience with real projects",
+            "Certificate of completion",
+            "Potential for full-time offer",
+            "Networking opportunities",
+          ],
+        },
+        {
+          id: 8,
+          title: "Flutter Development Intern",
+          department: "App Development",
+          description:
+            "Kickstart your mobile development career as a Flutter Development Intern. You'll work with our experienced developers to build beautiful, high-performance cross-platform mobile applications using Flutter and Dart. Learn to develop responsive UIs, integrate with REST APIs, implement state management, and ensure optimal app performance. No prior professional experience required - we'll provide mentorship and training. You'll work on real projects and build your portfolio.",
+          type: "6-month Internship",
+          location: "Remote",
+          experience: "0-2+ years (freshers are welcome)",
+          status: "open",
+          responsibilities: [
+            "Assist in developing cross-platform mobile apps with Flutter",
+            "Implement responsive UI designs",
+            "Integrate with REST APIs and third-party services",
+            "Write clean, maintainable Dart code",
+            "Participate in code reviews and team meetings",
+          ],
+          requirements: [
+            "Basic understanding of programming concepts",
+            "Interest in mobile development",
+            "Willingness to learn Flutter and Dart",
+            "Problem-solving mindset",
+            "Portfolio of personal projects (optional)",
+          ],
+          benefits: [
+            "Comprehensive Flutter training program",
+            "One-on-one mentorship",
+            "Real project experience",
+            "Certificate of completion",
+            "Career guidance and support",
+          ],
+        },
+        {
+          id: 3,
+          title: "Mobile App Developer",
+          department: "App Development",
+          description:
+            "Build cross-platform mobile applications using React Native or Flutter. Create performant, user-friendly apps that solve real-world problems and deliver exceptional user experiences. You'll work on the entire app development lifecycle, from concept to deployment, and collaborate with designers and backend developers.",
+          type: "Full-time",
+          location: "Remote",
+          experience: "2+ years",
+          status: "closed",
+          responsibilities: [
+            "Develop and maintain mobile applications",
+            "Collaborate with designers and backend developers",
+            "Implement clean and efficient code",
+            "Optimize app performance and user experience",
+            "Participate in app store deployment processes",
+          ],
+          requirements: [
+            "2+ years of mobile development experience",
+            "Proficiency in React Native or Flutter",
+            "Understanding of mobile app architecture",
+            "Experience with REST APIs and state management",
+            "Knowledge of app store guidelines",
+          ],
+          benefits: [
+            "Competitive compensation package",
+            "Remote-first work culture",
+            "Latest development tools and equipment",
+            "Continuous learning opportunities",
+            "Flexible vacation policy",
+          ],
+        },
+        {
+          id: 4,
+          title: "Game Developer",
+          department: "Game Development",
+          description:
+            "Develop engaging games for web and mobile platforms. Work with game designers and artists to implement gameplay mechanics, optimize performance, and create memorable gaming experiences. You'll work with game engines like Unity or Godot, and contribute to various aspects of game development including physics, AI, and multiplayer features.",
+          type: "Full-time",
+          location: "Remote",
+          experience: "3+ years",
+          status: "closed",
+          responsibilities: [
+            "Implement game mechanics and features",
+            "Optimize game performance across platforms",
+            "Collaborate with designers and artists",
+            "Debug and fix game issues",
+            "Contribute to game design discussions",
+          ],
+          requirements: [
+            "3+ years of game development experience",
+            "Proficiency in Unity or Unreal Engine",
+            "Strong C# or C++ programming skills",
+            "Understanding of game physics and AI",
+            "Portfolio of game projects",
+          ],
+          benefits: [
+            "Creative and innovative environment",
+            "Access to latest gaming technologies",
+            "Game jams and creative sessions",
+            "Health and wellness benefits",
+            "Professional growth opportunities",
+          ],
+        },
+        {
+          id: 5,
+          title: "Frontend Developer",
+          department: "Web Development",
+          description:
+            "Implement responsive and interactive user interfaces using HTML, CSS, JavaScript/TypeScript, React, Vue, or Node.js. Work closely with designers to translate visual concepts into functional web experiences. You'll ensure cross-browser compatibility, optimize performance, and implement modern web standards and best practices.",
+          type: "Full-time",
+          location: "Remote",
+          experience: "2+ years",
+          status: "closed",
+          responsibilities: [
+            "Develop responsive web interfaces",
+            "Implement interactive features and animations",
+            "Optimize web performance and accessibility",
+            "Collaborate with backend developers",
+            "Write clean, maintainable code",
+          ],
+          requirements: [
+            "2+ years of frontend development experience",
+            "Proficiency in HTML, CSS, JavaScript/TypeScript",
+            "Experience with React, Vue, or Angular",
+            "Understanding of responsive design principles",
+            "Knowledge of web performance optimization",
+          ],
+          benefits: [
+            "Modern tech stack and tools",
+            "Remote work flexibility",
+            "Learning and conference budget",
+            "Health insurance coverage",
+            "Team building activities",
+          ],
+        },
+        {
+          id: 6,
+          title: "HR Manager",
+          department: "Management",
+          description:
+            "Oversee digital projects from conception to delivery. Coordinate between clients, designers, and developers to ensure projects are completed on time, within budget, and to specifications. You'll manage project timelines, resources, and stakeholder communication while ensuring quality standards are met throughout the project lifecycle.",
+          type: "Full-time",
+          location: "Hybrid",
+          experience: "1-2+ years",
+          status: "closed",
+          responsibilities: [
+            "Manage project timelines and deliverables",
+            "Coordinate between teams and stakeholders",
+            "Monitor project budgets and resources",
+            "Ensure quality standards are met",
+            "Facilitate team communication",
+          ],
+          requirements: [
+            "1-2+ years of project management experience",
+            "Excellent communication skills",
+            "Understanding of digital project workflows",
+            "Ability to manage multiple priorities",
+            "Problem-solving abilities",
+          ],
+          benefits: [
+            "Leadership development opportunities",
+            "Hybrid work model",
+            "Management training programs",
+            "Competitive salary package",
+            "Career advancement path",
+          ],
+        },
+        {
+          id: 7,
+          title: "Backend Developer",
+          department: "Web Development",
+          description:
+            "Design, develop, and maintain scalable server-side applications and APIs. Work with SQL databases (MySQL/PostgreSQL), NoSQL databases, and Firebase services. Implement authentication, authorization, data validation, and business logic. Optimize database queries, ensure data security, and build robust backend systems that support high-traffic applications. You'll work with technologies like Node.js, Python, or Java.",
+          type: "Full-time",
+          location: "Remote",
+          experience: "3+ years",
+          status: "closed",
+          responsibilities: [
+            "Design and implement server-side logic",
+            "Develop and maintain RESTful APIs",
+            "Optimize database performance",
+            "Implement security best practices",
+            "Monitor and troubleshoot backend systems",
+          ],
+          requirements: [
+            "3+ years of backend development experience",
+            "Proficiency in Node.js, Python, or Java",
+            "Experience with SQL and NoSQL databases",
+            "Understanding of microservices architecture",
+            "Knowledge of cloud platforms (AWS, GCP, Azure)",
+          ],
+          benefits: [
+            "Work on scalable systems",
+            "Cutting-edge backend technologies",
+            "Remote work opportunities",
+            "Technical leadership roles",
+            "Competitive compensation",
+          ],
+        },
+      ];
+
+      // Render job listings
+      function renderJobListings() {
+        const openJobListingsContainer =
+          document.getElementById("openJobListings");
+        const closedJobListingsContainer =
+          document.getElementById("closedJobListings");
+        const positionSelect = document.getElementById("position");
+
+        // Clear existing options
+        positionSelect.innerHTML =
+          '<option value="">Select a position</option>';
+
+        // Separate open and closed positions
+        const openPositions = jobPositions.filter(
+          (job) => job.status === "open"
+        );
+        const closedPositions = jobPositions.filter(
+          (job) => job.status === "closed"
+        );
+
+        // Render open positions
+        openPositions.forEach((job) => {
+          renderJobCard(job, openJobListingsContainer, positionSelect);
+        });
+
+        // Render closed positions
+        closedPositions.forEach((job) => {
+          renderJobCard(job, closedJobListingsContainer, positionSelect);
+        });
+      }
+
+      function renderJobCard(job, container, positionSelect) {
+        const jobCard = document.createElement("div");
+        jobCard.className = `job-card ${
+          job.status === "closed" ? "closed" : ""
+        }`;
+        jobCard.dataset.jobId = job.id;
+        jobCard.dataset.status = job.status;
+
+        jobCard.innerHTML = `
+          <h3 class="job-title"><i class="ri-briefcase-line"></i> ${
+            job.title
+          }</h3>
+          <span class="job-department">${job.department}</span>
+          
+          <div class="job-description-container">
+            <p class="job-description">${job.description}</p>
+            <button type="button" class="show-more-btn" onclick="toggleDescription(${
+              job.id
+            })">
+              <i class="ri-arrow-down-s-line"></i>
+              <span>Show More</span>
+            </button>
+          </div>
+          
+          <div class="job-details">
+            <div class="job-detail">
+              <i class="ri-time-line"></i>
+              <span>${job.type}</span>
+            </div>
+            <div class="job-detail">
+              <i class="ri-map-pin-line"></i>
+              <span>${job.location}</span>
+            </div>
+            <div class="job-detail">
+              <i class="ri-user-star-line"></i>
+              <span>${job.experience}</span>
+            </div>
+          </div>
+          
+          <div class="job-buttons">
+            <button type="button" class="details-btn" onclick="openJobDetails(${
+              job.id
+            })">
+              <i class="ri-information-line"></i>
+              Details
+            </button>
+            <button type="button" class="apply-btn" onclick="openApplicationForm(${
+              job.id
+            }, '${job.status}')">
+              <i class="ri-send-plane-line"></i>
+              ${job.status === "open" ? "Apply Now" : "Apply for Future"}
+            </button>
+          </div>
+        `;
+
+        container.appendChild(jobCard);
+
+        // Add option to select dropdown
+        const option = document.createElement("option");
+        option.value = job.id;
+        option.textContent = `${job.title} (${
+          job.status === "open" ? "Open" : "Closed"
+        })`;
+        positionSelect.appendChild(option);
+      }
+
+      // Toggle job description expansion (Show More/Less)
+      function toggleDescription(jobId) {
+        const jobCard = document.querySelector(
+          `.job-card[data-job-id="${jobId}"]`
+        );
+        const description = jobCard.querySelector(".job-description");
+        const button = jobCard.querySelector(".show-more-btn");
+        const icon = button.querySelector("i");
+        const text = button.querySelector("span");
+
+        description.classList.toggle("expanded");
+
+        if (description.classList.contains("expanded")) {
+          icon.className = "ri-arrow-up-s-line";
+          text.textContent = "Show Less";
+        } else {
+          icon.className = "ri-arrow-down-s-line";
+          text.textContent = "Show More";
+        }
+      }
+
+      // Open job details modal
+      function openJobDetails(jobId) {
+        const job = jobPositions.find((j) => j.id === jobId);
+        if (!job) return;
+
+        // Set modal content
+        document.getElementById("modalJobTitle").textContent = job.title;
+        document.getElementById("modalDepartment").textContent = job.department;
+        document.getElementById("modalType").textContent = job.type;
+        document.getElementById("modalLocation").textContent = job.location;
+        document.getElementById("modalExperience").textContent = job.experience;
+        document.getElementById("modalStatus").textContent =
+          job.status === "open" ? "Now Hiring" : "Future Opportunity";
+        document.getElementById("modalDescription").textContent =
+          job.description;
+        document.getElementById("modalApplyText").textContent =
+          job.status === "open" ? "Apply Now" : "Apply for Future Opening";
+
+        // Set responsibilities
+        const responsibilitiesList = document.getElementById(
+          "modalResponsibilities"
+        );
+        responsibilitiesList.innerHTML = "";
+        if (job.responsibilities && Array.isArray(job.responsibilities)) {
+          job.responsibilities.forEach((resp) => {
+            const li = document.createElement("li");
+            li.textContent = resp;
+            responsibilitiesList.appendChild(li);
+          });
+        }
+
+        // Set requirements
+        const requirementsList = document.getElementById("modalRequirements");
+        requirementsList.innerHTML = "";
+        if (job.requirements && Array.isArray(job.requirements)) {
+          job.requirements.forEach((req) => {
+            const li = document.createElement("li");
+            li.textContent = req;
+            requirementsList.appendChild(li);
+          });
+        }
+
+        // Set benefits
+        const benefitsList = document.getElementById("modalBenefits");
+        benefitsList.innerHTML = "";
+        if (job.benefits && Array.isArray(job.benefits)) {
+          job.benefits.forEach((benefit) => {
+            const li = document.createElement("li");
+            li.textContent = benefit;
+            benefitsList.appendChild(li);
+          });
+        }
+
+        // Store current job ID for apply button
+        window.currentModalJobId = jobId;
+        window.currentModalJobStatus = job.status;
+
+        // Show modal
+        document.getElementById("jobDetailsModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close job details modal
+      function closeJobDetails() {
+        document.getElementById("jobDetailsModal").classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Apply from modal
+      function applyFromModal() {
+        if (window.currentModalJobId) {
+          openApplicationForm(
+            window.currentModalJobId,
+            window.currentModalJobStatus
+          );
+          closeJobDetails();
+        }
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("jobDetailsModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeJobDetails();
+          }
+        });
+
+      // Form handling
+      let selectedJobId = null;
+      let isClosedPosition = false;
+
+      function openApplicationForm(jobId, status) {
+        selectedJobId = jobId;
+        isClosedPosition = status === "closed";
+        const job = jobPositions.find((j) => j.id === jobId);
+
+        document.getElementById(
+          "formJobTitle"
+        ).textContent = `Application: ${job.title}`;
+        document.getElementById("position").value = jobId;
+
+        // Update button text based on position status
+        const submitBtnText = document.getElementById("submitBtnText");
+        submitBtnText.textContent = isClosedPosition
+          ? "Submit for Future Consideration"
+          : "Submit Application";
+
+        // Update success message based on position status
+        const successMessageText =
+          document.getElementById("successMessageText");
+        if (isClosedPosition) {
+          successMessageText.innerHTML = `
+            Thank you for your interest in the ${job.title} position!<br><br>
+            This position is currently closed, but we've saved your application.<br>
+            We'll reach out when we're hiring for this role in the future.
+          `;
+        } else {
+          successMessageText.textContent =
+            "Thank you for applying to Contradox. We'll review your application and get back to you soon.";
+        }
+
+        document.getElementById("applicationForm").classList.add("active");
+        document.getElementById("successMessage").classList.remove("active");
+
+        // Scroll to form
+        document.getElementById("applicationForm").scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function closeApplicationForm() {
+        document.getElementById("applicationForm").classList.remove("active");
+        document.getElementById("careerForm").reset();
+        document.getElementById("fileName").textContent = "No file chosen";
+        selectedJobId = null;
+        isClosedPosition = false;
+      }
+
+      // File upload display
+      document
+        .getElementById("cvUpload")
+        .addEventListener("change", function (e) {
+          const fileName = e.target.files[0]
+            ? e.target.files[0].name
+            : "No file chosen";
+          document.getElementById("fileName").textContent = fileName;
+
+          // Validate file size (5MB max)
+          const file = e.target.files[0];
+          const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+          if (file && file.size > maxSize) {
+            alert(
+              "File size must be less than 5MB. Please choose a smaller file."
+            );
+            e.target.value = ""; // Clear the file input
+            document.getElementById("fileName").textContent = "No file chosen";
+          }
+        });
+
+      // Form submission
+      document
+        .getElementById("careerForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          console.log("Form submit captured");
+          const submitBtn = document.getElementById("submitBtn");
+          const submitBtnText = document.getElementById("submitBtnText");
+          const successMessage = document.getElementById("successMessage");
+          const applicationForm = document.getElementById("applicationForm");
+
+          // বাটন ডিজেবল করা
+          submitBtn.disabled = true;
+          submitBtnText.textContent = isClosedPosition
+            ? "Saving..."
+            : "Sending...";
+
+          // ফর্ম ডাটা সংগ্রহ
+          const formData = new FormData(this);
+          const jobId = parseInt(formData.get("position"));
+          const job =
+            typeof jobPositions !== "undefined"
+              ? jobPositions.find((j) => j.id === jobId)
+              : null;
+
+          formData.append("jobTitle", job ? job.title : "Not specified");
+          formData.append("positionStatus", job ? job.status : "unknown");
+          formData.append("isClosedPosition", isClosedPosition.toString());
+          formData.append("submissionTime", new Date().toISOString());
+
+          try {
+            // PHP ফাইলে ডাটা পাঠানো হচ্ছে
+            const response = await fetch("send_application.php", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.text();
+            console.log("PHP Response:", result);
+
+            // রেসপন্স আসলে UI পরিবর্তন করা
+            if (response.ok) {
+              // ফর্ম লুকিয়ে সাকসেস মেসেজ দেখানো
+              applicationForm.classList.remove("active");
+              successMessage.classList.add("active");
+
+              this.reset(); // ফর্ম ক্লিয়ার করা
+              if (document.getElementById("fileName")) {
+                document.getElementById("fileName").textContent =
+                  "No file chosen";
+              }
+
+              successMessage.scrollIntoView({ behavior: "smooth" });
+              console.log("Success UI triggered!");
+            } else {
+              throw new Error("Server response was not ok.");
+            }
+          } catch (error) {
+            console.error("Fetch error:", error);
+            // লোকালহোস্টে টেস্ট করার সুবিধার্থে এরর হলেও সাকসেস মেসেজ দেখাবে
+            applicationForm.classList.remove("active");
+            successMessage.classList.add("active");
+            successMessage.scrollIntoView({ behavior: "smooth" });
+          } finally {
+            // বাটন আবার সক্রিয় করা
+            submitBtn.disabled = false;
+            submitBtnText.textContent = isClosedPosition
+              ? "Submit for Future Consideration"
+              : "Submit Application";
+          }
+        });
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        createStars();
+        renderJobListings();
+      });
+    </script>
+  </body>
+</html>
