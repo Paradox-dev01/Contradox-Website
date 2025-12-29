@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['cv'])) {
         die("File upload error: " . $_FILES['cv']['error']);
     }
 
-    $to   = "contradox.tech.cv@gmail.com";
-    $from = "contradox.tech.cv@gmail.com";
+    $to   = "contradox.tech@gmail.com";
+    $from = "contradox.tech@gmail.com";
 
     $message = "New application received.\n\n"
         . "Name: " . ($_POST['fullName'] ?? 'N/A') . "\n"
@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['cv'])) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'contradox.tech.cv@gmail.com';      // তোমার Gmail
-        $mail->Password   = 'karv ziqt rptv gdxa';         // ১৬ digit App Password (কোনো space ছাড়া)
+        $mail->Username   = "contradox.tech@gmail.com" ;    // তোমার Gmail
+        $mail->Password   = 'mjpw fsst gzwn wipl';       // ১৬ digit App Password (কোনো space ছাড়া)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
